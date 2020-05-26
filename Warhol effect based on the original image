@@ -1,0 +1,49 @@
+"""
+This program generates the Warhol effect based on the original image.
+"""
+
+from simpleimage import SimpleImage
+import random
+
+N_ROWS = 2
+N_COLS = 3
+PATCH_SIZE = 222
+WIDTH = N_COLS * PATCH_SIZE
+HEIGHT = N_ROWS * PATCH_SIZE
+PATCH_NAME = 'images/simba-sq.jpg'
+
+def main():
+    final_image = SimpleImage.blank(WIDTH, HEIGHT)
+    for i in range(N_COLS):
+        for j in range(N_ROWS):
+            random1 = float(input("Enter any value between 0 to 1.5: "))
+            random2 = float(input("Enter any value between 0 to 1.5: "))
+            random3 = float(input("Enter any value between 0 to 1.5: "))
+            patch = make_recolored_patch(random1, random2, random3)
+            width = patch.width
+            height = patch.height
+            for y in range(height):
+                for x in range(width):
+                    pixel = patch.get_pixel(x, y)
+                    final_image.set_pixel(i*PATCH_SIZE+x, j*PATCH_SIZE+y, pixel)
+    final_image.show()
+
+
+def make_recolored_patch(red_scale, green_scale, blue_scale):
+    '''
+    Implement this function to make a patch for the Warhol Filter. It
+    loads the patch image and recolors it.
+    :param red_scale: A number to multiply each pixels' red component by
+    :param green_scale: A number to multiply each pixels' green component by
+    :param blue_scale: A number to multiply each pixels' blue component by
+    :return: the newly generated patch
+    '''
+    patch = SimpleImage(PATCH_NAME)
+    for pixel in patch:
+        pixel.red = pixel.red * red_scale
+        pixel.green = pixel.green * green_scale
+        pixel.blue = pixel.blue * blue_scale
+    return patch
+
+if __name__ == '__main__':
+    main()
