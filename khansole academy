@@ -1,0 +1,31 @@
+"""
+Pre condition: none
+post condition: Add two numbers and gives output that your answer is correct or incorrect.
+"""
+
+import random
+# Range
+MIN_NUMBER=15
+MAX_NUMBER=95
+def main():
+    i=1
+    while i <= 3:  # checks for 3 correct answer
+        num1 = random.randint(MIN_NUMBER, MAX_NUMBER)
+        num2 = random.randint(MIN_NUMBER, MAX_NUMBER)
+        total = num1 + num2
+        user_answer= None
+        if user_answer != total:
+            print("What is " + str(num1) + " + " + str(num2) + " ?")
+            user_answer = int(input("Your Answer: "))
+            if user_answer == total:
+                print("Correct!" + "  " + "You've gotten " + str(i) + " correct in a row.")
+                i +=1
+            else:
+                print("Incorrect." + "  " + "The expected answer is " + str(total))
+    print("Congratulations!"+"  "+"You mastered addition.")
+
+
+# This provided line is required at the end of a Python file
+# to call the main() function.
+if __name__ == '__main__':
+    main()
