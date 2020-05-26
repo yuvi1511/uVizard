@@ -1,0 +1,72 @@
+"""
+File: extension.py
+------------------
+This is a file for creating an optional extension program, if
+you'd like to do so.
+"""
+import random
+
+def main():
+    """
+    You should write your code for this program in this function.
+    Make sure to delete the 'pass' line before starting to write
+    your own code. You should also delete this comment and replace
+    it with a better, more descriptive one.
+    """
+    remove_stones()
+
+def remove_stones():
+    i = 20
+    while i != 0:
+        j = 1
+        while j != 2:
+            if j == 1:
+                print("There are " + str(i) + " stones left")
+                if i > 7:
+                    random_numbers = random.randint(1,2)
+                    remove_stone = random_numbers
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(random_numbers))
+                    print(" ")
+                if i == 7:
+                    remove_stone = 1
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(remove_stone))
+                    print(" ")
+                if i == 6:
+                    remove_stone = 2
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(remove_stone))
+                    print(" ")
+                if i == 5:
+                    remove_stone = 1
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(remove_stone))
+                    print(" ")
+                if i == 4:
+                    random_numbers = random.randint(1,2)
+                    remove_stone = random_numbers
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(random_numbers))
+                    print(" ")
+                if i == 3:
+                    remove_stone = 2
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(remove_stone))
+                    print(" ")
+                if i == 2:
+                    remove_stone = 1
+                    print(" COM player " + str(j) + " would you like to remove 1 or 2 stones: " + str(remove_stone))
+                    print(" ")
+                while remove_stone > 2:
+                    remove_stone = int(input(" Please enter 1 or 2: "))
+                i -= remove_stone
+                j += 1
+            if j == 2:
+                print("There are " + str(i) + " stones left")
+                remove_stone = int(input(" player " + str(j) + " would you like to remove 1 or 2 stones: "))
+                print(" ")
+                while remove_stone > 2:
+                    remove_stone = int(input(" Please enter 1 or 2: "))
+                i -= remove_stone
+    print("COM Player is winner")
+
+
+# This provided line is required at the end of a Python file
+# to call the main() function.
+if __name__ == '__main__':
+    main()
