@@ -1,0 +1,63 @@
+"""
+File: khansole_academy.py
+-------------------------
+Add your comments here.
+"""
+
+import random
+import time
+
+def main():
+    print_intro(1)
+    run_phase(1)
+
+def run_phase(is_phase_1):
+    while True:
+        run_single_test(is_phase_1)
+        time.sleep(10)
+
+def run_single_test(is_phase_1):
+    test_animal = random_animal()
+    print(test_animal)
+    answer = input("Type the association: ")
+    if answer == get_association(test_animal, is_phase_1):
+        print(" ")
+    else:
+        print("Correct answer was", str(get_association(test_animal, is_phase_1)))
+        print("")
+
+def print_intro(is_phase_1):
+    if is_phase_1:
+        print('Association test, standard')
+    else:
+        print('Association test, flipped')
+    print('You will be asked to answer three questions.')
+    print('You should associate animals as follows:')
+    print('puppy', get_association('puppy', is_phase_1))
+    print('panda', get_association('panda', is_phase_1))
+    print('spider', get_association('spider', is_phase_1))
+    print('bat', get_association('bat', is_phase_1))
+    input('Press enter to start... ')
+
+
+def random_animal():
+    return random.choice(['puppy', 'panda', 'spider', 'bat'])
+
+
+def get_association(animal, is_phase_1):
+    if is_phase_1:
+        if animal == 'puppy' or animal == 'panda':
+            return 'cute'
+        if animal == 'bat' or animal == 'spider':
+            return 'scary'
+    else:
+        if animal == 'puppy' or animal == 'panda':
+            return 'scary'
+        if animal == 'bat' or animal == 'spider':
+            return 'cute'
+
+
+# This provided line is required at the end of a Python file
+# to call the main() function.
+if __name__ == '__main__':
+    main()
