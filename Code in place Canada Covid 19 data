@@ -1,0 +1,77 @@
+# Data analysis and visualization for COVID-19 in Canada.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+# file path
+CA_PATH = 'images/Canadacovid19.xlsx'
+def main():
+    print('Data analysis and visualization for COVID-19 in Canada.')
+    while True: # Shows the graphs for the entered province name
+        sheet = input('Enter a province name(Alberta, British Columbia, Manitoba, New Brunswick, NL, Norhwest Territories, Nova scotia, Nunavut, Ontario, PEI, Quebec, Saskatchevan, Yukon) or Canada: ')
+        if sheet == '':  # if you hit enter it breaks the loop.
+            break
+        else:
+            read_sheet(sheet) # read data from excel file
+
+def read_sheet(sheet): # red data for the particular excel sheet
+    province = pd.read_excel(CA_PATH,sheet_name=sheet)
+    date = list(province['date'])
+    total_tested = pd.DataFrame(province, columns=['numtested'])
+    total_case = pd.DataFrame(province, columns=['numtotal'])
+    new_case_per_day = pd.DataFrame(province, columns=['numtoday'])
+    total_death = list(province['numdeaths']) # converting number of deaths dat into list for mathematical computation.
+    death_per_day = new_cases_per_day(total_death)
+    death_per_day.insert(0, 0) # to match the dimension for x and y in the plot i am inserting 0 in the beginning of the list.
+    new_death_per_day = death_per_day
+    total_recovery = list(province['numrecover']) # converting number of deaths dat into list for mathematical computation.
+    recover_per_day = new_cases_per_day(total_recovery)
+    recover_per_day.insert(0, 0) # to match the dimension for x and y in the plot i am inserting 0 in the beginning of the list.
+    new_recover_per_day = recover_per_day
+    plt.plot(date, total_tested, "b")
+    plt.title('Number of people tested')
+    plt.ylabel('Tested people')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, total_case, "k")
+    plt.title('Total Cases')
+    plt.ylabel('Cases')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, total_death, "m")
+    plt.title('Total death')
+    plt.ylabel('Death')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, new_case_per_day, "r")
+    plt.title('Number of cases each day')
+    plt.ylabel('New cases')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, total_recovery, "g")
+    plt.title('Number of recovered people')
+    plt.ylabel('Recovered people')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, new_death_per_day, "r")
+    plt.title('Number of deaths per day')
+    plt.ylabel('Death')
+    plt.xlabel('Timeline')
+    plt.show()
+    plt.plot(date, new_recover_per_day, "g")
+    plt.title('Number of recovered people each day')
+    plt.ylabel('Recovered people')
+    plt.xlabel('Timeline')
+    plt.show() # create data visualization.
+    print('Thank you front line workers for providing a great service to Humanity.')
+
+def new_cases_per_day(data): # calculate new cases each day.
+    new_cases = []
+    for i in range(1, len(data)):
+        current_value = data[i]
+        previous_value = data[i - 1]
+        new_values = current_value - previous_value
+        new_cases.append(new_values)
+    return new_cases
+
+if __name__ == '__main__':
+    main()
