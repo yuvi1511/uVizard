@@ -1,0 +1,76 @@
+"""
+
+-------------------------
+Add your comments here.
+"""
+import time
+import random
+
+from termcolor import colored
+
+PHASE_TIME_S = 10
+
+def main():
+    print_intro()
+    print(" ")
+    run_phase(0)
+
+def run_phase(is_phase_1):
+    end_time = time.time() + PHASE_TIME_S
+    while True:
+        run_single_test(is_phase_1)
+        if time.time() > end_time:
+            break
+
+def run_single_test(is_phase_1):
+    if is_phase_1:
+        x = random_color_name()
+        y = print_in_color(x, x)
+        color = input("what color ink is the word written in? ")
+        if color == x:
+            print(" ")
+        else:
+            print("correct answer was: " + str(x))
+            print(" ")
+    else:
+        x = random_color_name()
+        z = random_color_name()
+        y = print_in_color(x, z)
+        color = input("what color ink is the word written in? ")
+        if color == z:
+            print(" ")
+        else:
+            print("correct answer was: " + str(z))
+            print(" ")
+
+def print_intro():
+    '''
+    Function: print intro
+    Prints a simple welcome message
+    '''
+    print('This is the Stroop test! Name the font-color used:')
+    print_in_color('red', 'red')
+    print_in_color('blue', 'blue')
+    print_in_color('pink', 'pink')
+
+def random_color_name():
+    '''
+    Function: random color
+    Returns a string (either red, blue or pink) with equal likelihood
+    '''
+    return random.choice(['red', 'blue', 'pink'])
+
+
+def print_in_color(text, font_color):
+    '''
+    Function: print in color
+    Just like "print" but this time, you can specify the font-color
+    '''
+    if font_color == 'pink':  # magenta is a lot to type...
+        font_color = 'magenta'
+    print(colored(text, font_color, attrs=['bold']))
+
+# This provided line is required at the end of a Python file
+# to call the main() function.
+if __name__ == '__main__':
+    main()
