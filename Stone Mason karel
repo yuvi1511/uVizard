@@ -1,0 +1,59 @@
+from karel.stanfordkarel import *
+
+def main():
+    """
+    Pre condition: facing east.
+    Post condition:It repairs towers and facing towards south at end of the process.
+    """
+    while front_is_clear():
+        turn_left()
+        repair_tower()
+        go_down()
+        move_to_repair_next_tower()
+    if front_is_blocked():
+        turn_left()
+        repair_tower()
+        go_down()
+
+    """
+    Pre condition: Karel facing towards north.
+    Post condition: Karel checks the beeper. If beeper is present it moves. If no beeper is present it puts beeper and
+    moves. At the end facing towards north.
+    """
+def repair_tower():
+    while front_is_clear():
+        if no_beepers_present():
+            put_beeper()
+            move()
+        else:
+            move()
+    if no_beepers_present():
+        put_beeper()
+    """
+    Pre condition: Facing towards north.
+    Post condition: Karel turns around and moves until front is clear and face towards east at the end.
+    """
+def go_down():
+    turn_around()
+    while front_is_clear():
+        move()
+    turn_left()
+    """
+    Pre condition: Karel facing towards north.
+    Post condition: Karel turns around and face towards south.
+    """
+def turn_around():
+    turn_left()
+    turn_left()
+    """
+    Pre condition: Karel facing towards east.
+    Post condition: Karel moves four steps or to th next tower while facing towards east.
+    """
+def move_to_repair_next_tower():
+    for i in range(4):
+        move()
+
+# There is no need to edit code beyond this point
+
+if __name__ == "__main__":
+    run_karel_program()
