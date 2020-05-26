@@ -1,0 +1,43 @@
+from karel.stanfordkarel import *
+
+def main():
+    """
+    Pre condition: none.
+    Post condition: Karel puts beepers on rectangles for 3 times. At the end face towards west.
+    """
+    for i in range(2):
+        put_beepers_on_rectangle()
+        turn_right()
+    put_beepers_on_rectangle()
+
+    """
+    Pre condition: none.
+    Post condition: Karel puts on walls of rectangle for 3 times and facing towards
+    other rectangle's wall.
+    """
+def put_beepers_on_rectangle():
+    for i in range(2):
+        put_beepers_on_wall()
+        turn_left()
+        move()
+    put_beepers_on_wall()
+    """
+    Pre condition: none
+    post condition: Karel puts beepers on wall and moves.
+    """
+def put_beepers_on_wall():
+    while left_is_blocked():
+        put_beeper()
+        move()
+    """
+    Turn right function.
+    """
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+
+# There is no need to edit code beyond this point
+
+if __name__ == "__main__":
+    run_karel_program()
