@@ -1,0 +1,84 @@
+from karel.stanfordkarel import * 
+
+"""
+Pre condition: Facing east
+Post condition: At the center of the first street, facing towards east with a beeper.
+"""
+
+def main():
+    while front_is_clear():
+        put_beeper()
+        move()
+    put_beeper()
+    detect_east_wall_beeper()
+    turn_around()
+    while front_is_clear():
+        move()
+    if no_beepers_present():
+        put_beeper()
+    detect_west_wall_beeper()
+    turn_around()
+    if front_is_clear():
+        move()
+    while beepers_present():
+        beeper_picking()
+    put_beeper()
+
+"""
+Pre condition:Facing east.
+Post condition: Facing west.
+Operation: While facing east or west it checks if there is beeper present or not. If beeper present, it picks up a 
+beeper otherwise it turns around and move.
+"""
+def beeper_picking():
+    while facing_east():
+        if no_beepers_present():
+            turn_around()
+            move()
+            if beepers_present():
+                pick_beeper()
+                move()
+        else:
+            move()
+    while facing_west():
+        if no_beepers_present():
+            turn_around()
+            move()
+            if beepers_present():
+                pick_beeper()
+                move()
+        else:
+            move()
+
+"""
+Pre condition: Facing east. Front is blocked.
+Post condition: Facing east.
+Operation: If front is blocked and facing east, it picks up a beeper.
+"""
+def detect_east_wall_beeper():
+    if facing_east():
+        front_is_blocked()
+        pick_beeper()
+
+"""
+Pre condition: Facing west. Front is blocked.
+Post condition: Facing west.
+Operation: If front is blocked and facing west, it picks up a beeper.
+"""
+def detect_west_wall_beeper():
+    if facing_west():
+        front_is_blocked()
+        pick_beeper()
+
+"""
+Turn around function.
+"""
+def turn_around():
+    turn_left()
+    turn_left()
+
+
+# There is no need to edit code beyond this point
+
+if __name__ == "__main__":
+    run_karel_program()
